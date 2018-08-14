@@ -46,7 +46,7 @@ abstract class Vehicle extends \pocketmine\entity\Vehicle{
 		$this->uuid = UUID::fromRandom();
 
 		// Not working since Minecraft hardcorded this
-		$this->propertyManager->setString(Entity::DATA_INTERACTIVE_TAG, "탑승하기");
+		$this->propertyManager->setString(Entity::DATA_INTERACTIVE_TAG, "Ride");
 	}
 
 	public function getName() : string{
@@ -69,10 +69,10 @@ abstract class Vehicle extends \pocketmine\entity\Vehicle{
 
 	public function ride(Player $player){
 		if(isset(self::$ridingEntities[$player->getName()])){
-			return $player->sendPopup("§c현재 라이딩중입니다.");
+			return $player->sendPopup("§cYou are now riding");
 		}
 		if($this->rider instanceof Player){
-			return $player->sendPopup("§c누군가가 탑승중입니다");
+			return $player->sendPopup("§cSomeone is already riding");
 		}
 		$this->rider = $player;
 		self::$ridingEntities[$player->getName()] = $this;
@@ -88,7 +88,7 @@ abstract class Vehicle extends \pocketmine\entity\Vehicle{
 		foreach($this->getViewers() as $viewer){
 			$this->sendLink($viewer);
 		}
-		$this->rider->sendPopup("§b점프 버튼을 눌러 내릴 수 있습니다");
+		$this->rider->sendPopup("§bPress jump or sneak to throw off");
 	}
 
 	public function input(float $motionX, float $motionY){

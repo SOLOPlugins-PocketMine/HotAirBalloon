@@ -34,7 +34,7 @@ class HotAirBalloon extends PluginBase{
 	protected function onEnable(){
 		S::command(
 			"vehicle registerskin",
-			"이동수단의 외형에 사용될 스킨을 등록합니다.",
+			"Register your skin to resources for visualize vehicle.",
 			"/vehicle registerskin <name>",
 			"op",
 			true,
@@ -47,12 +47,12 @@ class HotAirBalloon extends PluginBase{
 				$skin = $sender->getSkin();
 				HotAirBalloon::$resources->setSkin($name, $skin);
 
-				$sender->sendMessage(HotAirBalloon::$prefix . "스킨을 등록하였습니다.");
+				$sender->sendMessage(HotAirBalloon::$prefix . "You've registerd your skin.");
 			});
 
 		S::command(
 			"vehicle create",
-			"이동수단을 생성합니다.",
+			"Create a vehicle.",
 			"/vehicle create",
 			"op",
 			true,
@@ -60,7 +60,7 @@ class HotAirBalloon extends PluginBase{
 				$entity = Entity::createEntity("AirVehicle", $sender->getLevel(), Entity::createBaseNBT($sender->asVector3()));
 				$entity->spawnToAll();
 
-				$sender->sendMessage(HotAirBalloon::$prefix . "이동수단을 생성하였습니다.");
+				$sender->sendMessage(HotAirBalloon::$prefix . "Successfully created a vehicle.");
 			});
 
 		new VehicleHandler($this);
@@ -212,11 +212,11 @@ class S{
 
 			public function execute(CommandSender $sender, string $label, array $args) : bool{
 				if($this->permission !== "all" and !$sender->hasPermission($this->permission)){
-					$sender->sendMessage(HotAirBalloon::$prefix . "이 명령을 실행할 권한이 없습니다.");
+					$sender->sendMessage(HotAirBalloon::$prefix . "You don't have permission to use this command.");
 					return true;
 				}
 				if($this->playerOnly and !$sender instanceof Player){
-					$sender->sendMessage(HotAirBalloon::$prefix . "인게임에서만 사용 가능합니다.");
+					$sender->sendMessage(HotAirBalloon::$prefix . "You can't run this command in console.");
 					return true;
 				}
 				$callback = $this->callback;
