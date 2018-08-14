@@ -35,13 +35,13 @@ abstract class Vehicle extends \pocketmine\entity\Vehicle{
 	protected $drag = 0.02;
 
 	protected $baseOffset = 1.62;
-	
+
 	public function __construct(Level $level, CompoundTag $nbt){
 		parent::__construct($level, $nbt);
 	}
 
-	protected function initEntity() : void{
-		parent::initEntity();
+	protected function initEntity(CompoundTag $nbt) : void{
+		parent::initEntity($nbt);
 
 		$this->uuid = UUID::fromRandom();
 
